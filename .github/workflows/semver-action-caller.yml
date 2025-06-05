@@ -41,8 +41,8 @@ jobs:
           echo "previous_commit: ${{ steps.sver.outputs.previous_commit }}"
       - name: Print Commit msg
         run: |
-          echo ${{ github.event.head_commit.message }}
-      
+          echo "Version: ${{ github.event.head_commit.message }}"
+
       # Works, but requires action to have write accesss
       - name: Create tag
         uses: actions/github-script@v7.0.1
