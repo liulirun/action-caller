@@ -3,6 +3,9 @@ name: test for semantic-version
 on:
   # trigger for merging PR
   push:
+    branches:
+      - main
+
 jobs:
   use-semantic-version:
     runs-on: Ubuntu-latest
@@ -20,11 +23,10 @@ jobs:
         id: sver
         uses: paulhatch/semantic-version@v5.4.0
         with:
-          major_pattern: "/^(refactor|perf|BREAKING CHANGES):.*$/"
+          major_pattern: "/^(BREAKING CHANGES|refactor|perf):.*$/"
           minor_pattern: "/^(feat):.*$/"
           version_format: "${major}.${minor}.${patch}"
           search_commit_body: true
-          debug: true
 
       - name: Print return values
         run: |
@@ -40,6 +42,8 @@ jobs:
       - name: Print Commit msg
         run: |
           echo ${{ github.event.head_commit.message }}
+      
+      # Works, but requires action to have write accesss
       - name: Create tag
         uses: actions/github-script@v7.0.1
         with:
@@ -52,6 +56,7 @@ jobs:
               })
         env:
           TAGNAME: ${{ steps.sver.outputs.version }}
+
       # - name: Get current date
       #   id: date
       #   run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
