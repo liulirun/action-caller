@@ -1,9 +1,10 @@
 # https://github.com/PaulHatch/semantic-version
-name: test for create release
+name: test for semantic-version
 on:
+  # trigger for merging PR
   push:
-    tags:        
-      - '[0-9]+.[0-9]+.[0-9]+'
+    branches:
+      - main
 
 jobs:
   use-semantic-version:
