@@ -16,8 +16,7 @@ jobs:
             github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: "${{ env.TAGNAME}}",
-              name: "test-release-name"
+              tag_name: "${{ env.TAGNAME}}"
               })
         env:
           TAGNAME: '1.0.0'
