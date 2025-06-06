@@ -39,6 +39,7 @@ jobs:
           echo "Patch version: ${{ steps.sver.outputs.patch }}"
           echo "current_commit: ${{ steps.sver.outputs.current_commit }}"
           echo "previous_commit: ${{ steps.sver.outputs.previous_commit }}"
+          echo "previous_commit: ${{ steps.sver.outputs.previous_commit }}"
 
       - name: Create tag test 2
         run: |
