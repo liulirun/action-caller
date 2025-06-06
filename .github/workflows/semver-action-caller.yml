@@ -23,7 +23,6 @@ jobs:
         id: sver
         uses: paulhatch/semantic-version@v5.4.0
         with:
-          tag_prefix: "v"
           major_pattern: "/^(BREAKING CHANGES|refactor|perf):.*$/"
           minor_pattern: "/^(feat):.*$/"
           version_format: "${major}.${minor}.${patch}"
@@ -47,7 +46,6 @@ jobs:
           git tag ${{ steps.sver.outputs.version_tag }} && 
           git push origin ${{ steps.sver.outputs.version_tag }}
 
-
       # - name: Create tag
       #   uses: actions/github-script@v7.0.1
       #   with:
@@ -60,14 +58,3 @@ jobs:
       #         })s
       #   env:
       #     TAGNAME: ${{ steps.sver.outputs.version }}
-
-      - name: Print return values
-        run: |
-          echo "Version: ${{ steps.sver.outputs.version }}"
-          echo "Version tag: ${{ steps.sver.outputs.version_tag }}"
-          echo "Version type: ${{ steps.sver.outputs.version_type }}"
-          echo "Major version: ${{ steps.sver.outputs.major }}"
-          echo "Minor version: ${{ steps.sver.outputs.minor }}"
-          echo "Patch version: ${{ steps.sver.outputs.patch }}"
-          echo "current_commit: ${{ steps.sver.outputs.current_commit }}"
-          echo "previous_commit: ${{ steps.sver.outputs.previous_commit }}"
