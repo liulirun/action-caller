@@ -28,24 +28,22 @@ jobs:
           version_format: "${major}.${minor}.${patch}"
           search_commit_body: true
 
+      - name: Create tag test 2
+        run: |
+          git tag ${{ env.TAGNAME }} && 
+          git push origin ${{ env.TAGNAME }}
+        env: 
+          TAGNAME: ${{ steps.sver.outputs.version_tag }}
+
       - name: Print return values
         run: |
           echo "Version: ${{ steps.sver.outputs.version }}"
           echo "Version tag: ${{ steps.sver.outputs.version_tag }}"
           echo "Version type: ${{ steps.sver.outputs.version_type }}"
           echo "Is Tagged: ${{ steps.sver.outputs.is_tagged }}"
-          echo "Major version: ${{ steps.sver.outputs.major }}"
-          echo "Minor version: ${{ steps.sver.outputs.minor }}"
-          echo "Patch version: ${{ steps.sver.outputs.patch }}"
           echo "current_commit: ${{ steps.sver.outputs.current_commit }}"
           echo "previous_commit: ${{ steps.sver.outputs.previous_commit }}"
-          echo "previous_commit: ${{ steps.sver.outputs.previous_commit }}"
-
-      - name: Create tag test 2
-        run: |
-          git tag ${{ steps.sver.outputs.version_tag }} && 
-          git push origin ${{ steps.sver.outputs.version_tag }}
-
+  
       # - name: Create tag
       #   uses: actions/github-script@v7.0.1
       #   with:
