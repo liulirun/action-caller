@@ -44,8 +44,8 @@ jobs:
 
       - name: Create tag test 2
         run: |
-          git tag ${{ steps.sver.outputs.version }} && 
-          git push origin ${{ steps.sver.outputs.version }}
+          git tag ${{ steps.sver.outputs.version_tag }} && 
+          git push origin ${{ steps.sver.outputs.version_tag }}
 
 
       # - name: Create tag
